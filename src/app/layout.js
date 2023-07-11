@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs"
 import { dark } from "@clerk/themes"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { ThemeProvider } from "@/components/ThemeProvider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,7 +19,15 @@ export default function RootLayout({ children }) {
             }}
         >
             <html lang="en">
-                <body className={inter.className}>{children}</body>
+                <body className={`${inter.className} bg-background`}>
+                    <ThemeProvider
+                        attribute="class"
+                        default="system"
+                        enableSystem
+                    >
+                        {children}
+                    </ThemeProvider>
+                </body>
             </html>
         </ClerkProvider>
     )

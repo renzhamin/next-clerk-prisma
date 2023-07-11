@@ -7,12 +7,14 @@ export async function addItem(formdata) {
     const body = Object.fromEntries(formdata)
     const { name, content } = body
 
-    await prisma.todoItem.create({
+    const item = await prisma.todoItem.create({
         data: {
             name,
             content,
         },
     })
+
+    console.log("item is :: ", item)
 
     redirect("/")
 }

@@ -7,6 +7,9 @@ import {
     SignOutButton,
 } from "@clerk/nextjs"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import TodoItem from "@/components/TodoItem"
+import ThemeToggleButton from "@/components/ThemeToggleButton"
 
 function getTodos() {
     return prisma.todoItem.findMany()
@@ -20,27 +23,22 @@ export default async function Home() {
     }
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-10">
+        <main className="flex min-h-screen flex-col items-center justify-center p-10 gap-2">
             <SignedIn>
-                Id : {userId}
-                <Link href="/dashboard" className="text-blue-700">
-                    Dashboard
-                </Link>
-                <Link href="/new" className="text-blue-700">
-                    New
-                </Link>
-                {todos && (
-                    <div className="w-full border-2 border-red-700">
-                        {todos.map((item) => {
-                            return (
-                                <div>
-                                    {item.name} : {item.content}
-                                </div>
-                            )
-                        })}
-                    </div>
-                )}
-                <SignOutButton className="mt-auto" />
+                <div className="w-full">
+                    <TodoItem todos={todos} />
+                    <Button
+                        asChild
+                        className="min-w-[5rem] float-right m-4 mr-5 hover:bg-green-500"
+                    >
+                        <Link href="/new">New</Link>
+                    </Button>
+                </div>
+                <div className="mt-auto [&>*]:mx-6 [&>*]:underline text-xl">
+                    <Link href="/dashboard">Go to Dahsboard</Link>
+                    <SignOutButton />
+                    <ThemeToggleButton />
+                </div>
             </SignedIn>
             <SignedOut>
                 <SignInButton />
