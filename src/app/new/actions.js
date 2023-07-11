@@ -14,7 +14,5 @@ export async function addItem(formdata) {
         },
     })
 
-    console.log("item is :: ", item)
-
     redirect("/")
 }

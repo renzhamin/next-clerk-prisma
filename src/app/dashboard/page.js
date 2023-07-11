@@ -3,7 +3,6 @@ import { currentUser } from "@clerk/nextjs"
 
 export default async function Page() {
     const f = await currentUser()
-    console.log(f)
     return (
         <div>
             <UserButton />
